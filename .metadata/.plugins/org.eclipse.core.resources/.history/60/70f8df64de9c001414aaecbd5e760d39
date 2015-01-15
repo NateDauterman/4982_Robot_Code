@@ -33,7 +33,7 @@ public class Robot extends IterativeRobot {
     
     }
     
-    public void driveBase(){  //Axis 4 is small switch on the front, Top direction pad is axis 5 & 6
+    public void driveBase(){
     	double x = driver.getRawAxis(1);
     	double y = driver.getRawAxis(2);
     	double t = driver.getRawAxis(3);
