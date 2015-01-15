@@ -38,8 +38,6 @@ public class Drive {
 	}
 	
 	public void assignMotors(){
-		for(int thatOneVariableThatDoesSomething = 0; thatOneVariableThatDoesSomething < 4; thatOneVariableThatDoesSomething++){
-			motors[thatOneVariableThatDoesSomething].set(actualMotorSpeeds[thatOneVariableThatDoesSomething]);
-		}
+		
 	}
 }

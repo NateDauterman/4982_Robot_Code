@@ -66,6 +66,5 @@ public class Robot extends IterativeRobot {
     		drive.setMotor(wheels[i], i);
     	}
     	drive.calculateMotors();
-    	drive.assignMotors();
     }
 }
