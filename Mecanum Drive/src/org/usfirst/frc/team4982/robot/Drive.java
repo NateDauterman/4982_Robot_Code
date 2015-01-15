@@ -1,0 +1,39 @@
+package org.usfirst.frc.team4982.robot;
+
+import edu.wpi.first.wpilibj.Talon;
+
+/* Wheel Numbering
+ * 0    1
+ * 
+ * 2    3
+ */
+
+public class Drive {
+	private double[] desiredMotorSpeeds = new double[4];
+	private Talon[] motors = new Talon[4];
+	private double[] actualMotorSpeeds = new double[4];
+	
+	public void setMotor(double speed, int motor){
+		desiredMotorSpeeds[motor] = speed;
+	}
+	
+	public double getMotorDV(int motor){          //Get motor's desired value
+		return desiredMotorSpeeds[motor];
+	}
+
+	public double getMotorAV(int motor){          //Get motor's actual value
+		return actualMotorSpeeds[motor];
+	}
+	
+	public void calculateMotors(){
+		for(int i = 0; i < 4; i++){
+			if(!(((desiredMotorSpeeds[i] + .05) > actualMotorSpeeds[i]) && ((desiredMotorSpeeds[i] - .05) < actualMotorSpeeds[i]))){
+				if(desiredMotorSpeeds[i] < actualMotorSpeeds[i]){
+					actualMotorSpeeds[i] -= 0.02;
+				}else{
+					actualMotorSpeeds[i] += 0.02;					
+				}
+			}
+		}
+	}
+}

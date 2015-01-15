@@ -1,0 +1,15 @@
+package org.usfirst.frc.team4982.robot;
+
+import edu.wpi.first.wpilibj.Talon;
+
+/* Wheel Numbering
+ * 0    1
+ * 
+ * 2    3
+ */
+
+public class Drive {
+	double[] currentMotorSpeeds;
+	Talon[] motors = new Talon[4];
+	
+}
