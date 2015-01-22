@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
     
     /**
      * Calculates the desired values for each wheel.
-     * Uses joystick named 'driver' and calls methods from the drive class.
+     * Uses joystick named 'driver' and calls method from the drive class.
      * @author Jake Crozier
      */
     public void driveBase(){  //Axis 4 is small switch on the front, Top direction pad is axis 5 & 6

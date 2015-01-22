@@ -29,15 +29,9 @@ public class Robot extends IterativeRobot {
     
     
     public void testPeriodic() {
-    	
+    
     }
     
-    
-    /**
-     * Calculates the desired values for each wheel.
-     * Uses joystick named 'driver' and calls methods from the drive class.
-     * @author Jake Crozier
-     */
     public void driveBase(){  //Axis 4 is small switch on the front, Top direction pad is axis 5 & 6
     	double x = driver.getRawAxis(1);	
     	double y = driver.getRawAxis(2);
@@ -60,18 +54,17 @@ public class Robot extends IterativeRobot {
     	wheels[3] = y+t-x;		//Rear left wheel
     	
     	double max = 1;				    	
-    	for(int i = 0; i < 4; i++){		//Finds the max motor value, only if it is above 1 otherwise just store 1 as max
+    	for(int i = 0; i < 4; i++){		//Finds the max motor value
     		if(Math.abs(wheels[i]) > max){
     			max = Math.abs(wheels[i]);
     		}
     	}
-    	
-    	for(int i = 0; i < 4; i++){	
-    		wheels[i] /= max;	 		//Divides motor values by max
-    		if(driver.getRawButton(1)){	//If pressing trigger divide all values by 2, allows for an option of finer control
+    	for(int i = 0; i < 4; i++){
+    		wheels[i] /= max;
+    		if(driver.getRawButton(1)){
     			wheels[i] /= 2;
     		}
-    		drive.setMotor(wheels[i], i);	//Set each motor
+    		drive.setMotor(wheels[i], i);
     	}
     	drive.calculateMotors();
     	drive.assignMotors();

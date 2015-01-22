@@ -20,44 +20,18 @@ public class Drive {
 		}
 	}
 	
-	/**
-	 * Assigns a value to the desired motor value array.
-	 * @param  speed The desired speed of a wheel
-	 * @param  motor The desired wheel/motor to set the set too
-	 * @author Jake Crozier
-	 */
 	public void setMotor(double speed, int motor){//Set motor's desired value
 		desiredMotorSpeeds[motor] = speed;
 	}
-
-	/**
-	 * Returns the current desired speed of a wheel
-	 * @param  motor The desired wheel/motor
-	 * @return Current desired speed
-	 * @author Jake Crozier
-	 */
+	
 	public double getMotorDV(int motor){          //Get motor's desired value
 		return desiredMotorSpeeds[motor];
 	}
 
-
-	/**
-	 * Returns the current actual speed of a wheel
-	 * @param  motor The actual wheel/motor
-	 * @return Current actual speed
-	 * @author Jake Crozier
-	 */
 	public double getMotorAV(int motor){          //Get motor's actual value
 		return actualMotorSpeeds[motor];
 	}
 	
-
-	/**
-	 * Moves the actual motor speed closer to the desired motor speed.
-	 * <p>
-	 * Must call setMotorSpeed() for each wheel first
-	 * @author Jake Crozier
-	 */
 	public void calculateMotors(){				  //Called to calculate motor speeds, should be called once per cycle
 		for(int i = 0; i < 4; i++){
 			if(!(((desiredMotorSpeeds[i] + sI*1.5) > actualMotorSpeeds[i]) && ((desiredMotorSpeeds[i] - sI*1.5) < actualMotorSpeeds[i]))){  //If actual speed is more than 1.5*speedIncrement away from desired value
@@ -70,18 +44,12 @@ public class Drive {
 		}
 	}
 	
-	/**
-	 * Set actual speeds to each motor.
-	 * <p>
-	 * Must call calculateMotors() first
-	 * @author Jake Crozier
-	 */
-	public void assignMotors(){					//Called to set motor speeds, should be called once per cycle
+	public void assignMotors(){
 		for(int i = 0; i < 4; i++){
-			if(actualMotorSpeeds[i] > -0.1 && actualMotorSpeeds[i] < .1){ 	//If actual speed is less than 10% assign a value of 0 to the motor
+			if(actualMotorSpeeds[i] > -0.1 && actualMotorSpeeds[i] < .1){
 				motors[i].set(0);
 			}{
-				motors[i].set(actualMotorSpeeds[i]);	//Set motor to the actual motor speed
+				motors[i].set(actualMotorSpeeds[i]);
 			}
 		}
 	}

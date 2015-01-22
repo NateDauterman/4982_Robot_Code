@@ -29,15 +29,9 @@ public class Robot extends IterativeRobot {
     
     
     public void testPeriodic() {
-    	
+    
     }
     
-    
-    /**
-     * Calculates the desired values for each wheel.
-     * Uses joystick named 'driver' and calls methods from the drive class.
-     * @author Jake Crozier
-     */
     public void driveBase(){  //Axis 4 is small switch on the front, Top direction pad is axis 5 & 6
     	double x = driver.getRawAxis(1);	
     	double y = driver.getRawAxis(2);

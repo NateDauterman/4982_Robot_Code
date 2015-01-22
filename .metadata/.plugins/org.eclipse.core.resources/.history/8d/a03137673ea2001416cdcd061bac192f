@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 
 /* Wheel Numbering
- * 1   0
+ * 0    1
  * 
- * 3   2
+ * 2    3
  */
 
 public class Robot extends IterativeRobot {
@@ -29,15 +29,9 @@ public class Robot extends IterativeRobot {
     
     
     public void testPeriodic() {
-    	
+    
     }
     
-    
-    /**
-     * Calculates the desired values for each wheel.
-     * Uses joystick named 'driver' and calls methods from the drive class.
-     * @author Jake Crozier
-     */
     public void driveBase(){  //Axis 4 is small switch on the front, Top direction pad is axis 5 & 6
     	double x = driver.getRawAxis(1);	
     	double y = driver.getRawAxis(2);
@@ -52,26 +46,23 @@ public class Robot extends IterativeRobot {
     	if(t > -0.1 && t < 0.1){		//10% null zone for the twist value
     		t = 0;
     	}
-    	double[] wheels = new double[4]; //Double array storing desired values for the wheels
-    	
-    	wheels[0] = y-(t+x);    //Front right wheel
-    	wheels[1] = y+t+x;		//Front left wheel
-    	wheels[2] = y+x-t;		//Rear right wheel
-    	wheels[3] = y+t-x;		//Rear left wheel
-    	
-    	double max = 1;				    	
-    	for(int i = 0; i < 4; i++){		//Finds the max motor value, only if it is above 1 otherwise just store 1 as max
-    		if(Math.abs(wheels[i]) > max){
-    			max = Math.abs(wheels[i]);
+    	double[] wheels = new double[4];
+    	wheels[0] = y-(t+x);
+    	wheels[1] = y+t+x;
+    	wheels[2] = y+x-t;
+    	wheels[3] = y+t-x;
+    	double max = 1;
+    	for(int i = 0; i < 4; i++){
+    		if(wheels[i] > max){
+    			max = wheels[i];
     		}
     	}
-    	
-    	for(int i = 0; i < 4; i++){	
-    		wheels[i] /= max;	 		//Divides motor values by max
-    		if(driver.getRawButton(1)){	//If pressing trigger divide all values by 2, allows for an option of finer control
+    	for(int i = 0; i < 4; i++){
+    		wheels[i] /= max;
+    		if(driver.getRawButton(1)){
     			wheels[i] /= 2;
     		}
-    		drive.setMotor(wheels[i], i);	//Set each motor
+    		drive.setMotor(wheels[i], i);
     	}
     	drive.calculateMotors();
     	drive.assignMotors();
