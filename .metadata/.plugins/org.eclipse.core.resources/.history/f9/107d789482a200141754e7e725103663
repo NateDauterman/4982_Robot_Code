@@ -14,8 +14,6 @@ public class Robot extends IterativeRobot {
     Joystick driver = new Joystick(0);  //Set first joystick plugged in as driver
     Drive drive = new Drive();
     
-    public boolean debugMode = false;
-    
     public void robotInit() {
 
     }
@@ -41,9 +39,9 @@ public class Robot extends IterativeRobot {
      * @author Jake Crozier
      */
     public void driveBase(){  //Axis 4 is small switch on the front, Top direction pad is axis 5 & 6
-    	double x = driver.getRawAxis(0);	
-    	double y = -driver.getRawAxis(1);
-    	double t = driver.getRawAxis(2);
+    	double x = driver.getRawAxis(1);	
+    	double y = driver.getRawAxis(2);
+    	double t = driver.getRawAxis(3);
     	
     	if(x > -0.1 && x < 0.1){		//10% null zone for the x value
     		x = 0;
@@ -70,19 +68,12 @@ public class Robot extends IterativeRobot {
     	
     	for(int i = 0; i < 4; i++){	
     		wheels[i] /= max;	 		//Divides motor values by max
-    		if(driver.getRawButton(1) && !debugMode){	//If pressing trigger divide all values by 2, allows for an option of finer control
+    		if(driver.getRawButton(1)){	//If pressing trigger divide all values by 2, allows for an option of finer control
     			wheels[i] /= 2;
     		}
     		drive.setMotor(wheels[i], i);	//Set each motor
     	}
-    	if(debugMode){
-        	if(driver.getRawButton(1)){
-            	drive.calculateMotors();
-            	drive.assignMotors();
-        	}    		
-    	}else{
-    		drive.calculateMotors();
-        	drive.assignMotors();
-    	}
+    	drive.calculateMotors();
+    	drive.assignMotors();
     }
 }

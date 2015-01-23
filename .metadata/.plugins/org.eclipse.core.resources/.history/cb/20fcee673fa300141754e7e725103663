@@ -14,14 +14,13 @@ public class Drive {
 	private double[] actualMotorSpeeds = new double[4];	 	//Actual motor values
 	private double sI = 0.05;								//Value to change actual speed by
 	
-	public boolean debugMode = false;
+	public boolean debugMode = true;
 	
 	public Drive(){
 		for(int i = 0; i < 4; i++){
 			motors[i] = new Talon(i); 		//Assign PWM ports
 			motors[i].setSafetyEnabled(true);
 			motors[i].setExpiration(.1);
-			
 		}
 	}
 	
@@ -89,15 +88,10 @@ public class Drive {
 					System.out.println(i + ": " + 0);
 				}				
 			}{
-				if(i == 1 || i == 3){
-					motors[i].set(-actualMotorSpeeds[i]);	//Set motor to the actual motor speed
-				}else{
-					motors[i].set(actualMotorSpeeds[i]);	//Set motor to the actual motor speed
-				}
+				motors[i].set(actualMotorSpeeds[i]);	//Set motor to the actual motor speed
 				if(debugMode){
 					System.out.println(i + ": " + actualMotorSpeeds[i]);					
 				}
-				System.out.println(i + ": " + actualMotorSpeeds[i]);
 			}
 		}
 	}

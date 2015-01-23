@@ -14,14 +14,9 @@ public class Drive {
 	private double[] actualMotorSpeeds = new double[4];	 	//Actual motor values
 	private double sI = 0.05;								//Value to change actual speed by
 	
-	public boolean debugMode = false;
-	
 	public Drive(){
 		for(int i = 0; i < 4; i++){
 			motors[i] = new Talon(i); 		//Assign PWM ports
-			motors[i].setSafetyEnabled(true);
-			motors[i].setExpiration(.1);
-			
 		}
 	}
 	
@@ -78,25 +73,15 @@ public class Drive {
 	/**
 	 * Set actual speeds to each motor.
 	 * <p>
-	 * Must call calculateMotors() first.
+	 * Must call calculateMotors() first
 	 * @author Jake Crozier
 	 */
 	public void assignMotors(){					//Called to set motor speeds, should be called once per cycle
 		for(int i = 0; i < 4; i++){
 			if(actualMotorSpeeds[i] > -0.1 && actualMotorSpeeds[i] < .1){ 	//If actual speed is less than 10% assign a value of 0 to the motor
 				motors[i].set(0);
-				if(debugMode){
-					System.out.println(i + ": " + 0);
-				}				
 			}{
-				if(i == 1 || i == 3){
-					motors[i].set(-actualMotorSpeeds[i]);	//Set motor to the actual motor speed
-				}else{
-					motors[i].set(actualMotorSpeeds[i]);	//Set motor to the actual motor speed
-				}
-				if(debugMode){
-					System.out.println(i + ": " + actualMotorSpeeds[i]);					
-				}
+				motors[i].set(actualMotorSpeeds[i]);	//Set motor to the actual motor speed
 				System.out.println(i + ": " + actualMotorSpeeds[i]);
 			}
 		}

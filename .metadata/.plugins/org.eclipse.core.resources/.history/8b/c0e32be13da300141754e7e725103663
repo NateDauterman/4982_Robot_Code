@@ -14,7 +14,7 @@ public class Robot extends IterativeRobot {
     Joystick driver = new Joystick(0);  //Set first joystick plugged in as driver
     Drive drive = new Drive();
     
-    public boolean debugMode = false;
+    public boolean debugMode = true;
     
     public void robotInit() {
 
@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
      */
     public void driveBase(){  //Axis 4 is small switch on the front, Top direction pad is axis 5 & 6
     	double x = driver.getRawAxis(0);	
-    	double y = -driver.getRawAxis(1);
+    	double y = driver.getRawAxis(1);
     	double t = driver.getRawAxis(2);
     	
     	if(x > -0.1 && x < 0.1){		//10% null zone for the x value
